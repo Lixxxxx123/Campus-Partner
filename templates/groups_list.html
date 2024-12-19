@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}小组列表{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/groups_list.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h1>小组列表</h1>
+
+    <div class="group-container">
+        {% if groups %}
+            <div class="group-list">
+                {% for group in groups %}
+                    <div class="group-card">
+                        <h3 class="group-name">{{ group.name }}</h3>
+                        <p class="group-description">{{ group.description }}</p>
+                        <p class="group-admin"><strong>管理员：</strong>{{ group.admin.username }}</p>
+                        <a href="{{ url_for('group_detail', group_id=group.id) }}" class="btn-view-group">查看小组</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>目前没有任何小组，快来创建一个吧！</p>
+        {% endif %}
+    </div>
+
+    <!-- 分页功能（如果有） -->
+    <div class="pagination">
+        {% if groups.has_prev %}
+            <a href="{{ url_for('groups_list', page=groups.prev_num) }}" class="pagination-link">上一页</a>
+        {% endif %}
+        {% if groups.has_next %}
+            <a href="{{ url_for('groups_list', page=groups.next_num) }}" class="pagination-link">下一页</a>
+        {% endif %}
+    </div>
+{% endblock %}

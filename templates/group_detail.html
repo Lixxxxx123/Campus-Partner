@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}{{ group.name }} {% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/group_detail.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="group-detail-container">
+        <div class="group-header">
+            <div class="group-header-info">
+                <h1 class="group-name">{{ group.name }}</h1>
+                <p class="group-description">{{ group.description or "该小组没有描述" }}</p>
+                <div class="group-admin">
+                    <strong>管理员：</strong> {{ group.admin.username }}
+                </div>
+            </div>
+            <div class="group-header-image">
+                <img src="{{ url_for('static', filename='images/th.gif') }}" alt="Group Avatar" class="group-avatar">
+            </div>
+        </div>
+
+        <div class="group-members">
+            <h3>小组成员：</h3>
+            <div class="members-list">
+                {% for member in members %}
+                    <div class="member-card">
+                        <img src="{{ url_for('static', filename='images/moon-9164274_1280.png') }}" alt="{{ member.username }} Avatar" class="member-avatar">
+                        <p>{{ member.username }}</p>
+                        {% if is_admin %}
+                            <form action="{{ url_for('remove_member', group_id=group.id, user_id=member.id) }}" method="post" onsubmit="return confirm('确认删除该成员吗？');">
+                                <button type="submit" class="btn-remove-member">删除成员</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="group-posts">
+            <h3>小组帖子：</h3>
+            {% if posts %}
+                <ul class="post-list">
+                    {% for post in posts %}
+                        <li class="post-item">
+                            <!-- 显示帖子标题和前50个字 -->
+                            <a href="{{ url_for('post_detail', post_id=post.id, group_id=group.id) }}" class="post-title">{{ post.title }}</a>
+                            <p class="post-content">{{ post.content[:50] }}{% if post.content|length > 50 %}...{% endif %}</p>
+                            <p class="post-date">{{ post.date_created.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                            {% if is_admin or current_user.id == post.author.id or current_user.role == 'admin' %}
+                                <form action="{{ url_for('delete_post', post_id=post.id, group_id=group.id) }}" method="post" onsubmit="return confirm('确定要删除该帖子吗？');">
+                                    <button type="submit" class="btn-delete-post">删除帖子</button>
+                                </form>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>该小组暂无帖子。</p>
+            {% endif %}
+        </div>
+
+        <div class="group-actions">
+            {% if not current_user.is_authenticated %}
+                <p>请先登录以参与讨论</p>
+            {% else %}
+                {% if current_user not in members %}
+                    <form action="{{ url_for('join_group', group_id=group.id) }}" method="post">
+                        <button type="submit" class="btn-join-group">加入小组</button>
+                    </form>
+                {% else %}
+                    <form action="{{ url_for('post_in_group', group_id=group.id) }}" method="post">
+                        <button type="submit" class="btn-create-post">发布帖子</button>
+                    </form>
+                    {% if is_admin %}
+                    {#                    <p>你是小组管理员。</p>#}
+                    {#                <a href="{{ url_for('edit_group', group_id=group.id) }}" class="btn-edit-group">编辑小组</a>#}
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

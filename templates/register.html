@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}注册页面 - Campus Partner{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h2 class="text-center mb-4">用户注册</h2>
+
+    <form method="POST" action="{{ url_for('register') }}">
+        {{ form.hidden_tag() }}
+
+        <!-- 用户名输入框 -->
+        <div class="form-group">
+            <label for="username">用户名</label>
+            {{ form.username(class="form-control", id="username", placeholder="请输入用户名") }}
+            {% if form.username.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.username.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- 电子邮件输入框 -->
+        <div class="form-group">
+            <label for="email">电子邮件</label>
+            {{ form.email(class="form-control", id="email", placeholder="请输入电子邮件") }}
+            {% if form.email.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.email.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- 密码输入框 -->
+        <div class="form-group">
+            <label for="password">密码</label>
+            {{ form.password(class="form-control", id="password", placeholder="请输入密码") }}
+            {% if form.password.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- 确认密码输入框 -->
+        <div class="form-group">
+            <label for="confirm_password">确认密码</label>
+            {{ form.confirm_password(class="form-control", id="confirm_password", placeholder="请确认密码") }}
+            {% if form.confirm_password.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.confirm_password.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">注册</button>
+    </form>
+
+    <p class="text-center mt-3">已有账户？<a href="{{ url_for('login') }}">登录</a></p>
+{% endblock %}
+

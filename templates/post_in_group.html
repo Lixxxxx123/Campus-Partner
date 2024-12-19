@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}发布帖子 - {{ group.name }}{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/post_in_group.css') }}">
+{% endblock %}
+
+{% block content %}
+    <!-- 页面标题 -->
+    <h1 class="page-title">发布新帖子</h1>
+
+    <!-- 发布帖子表单 -->
+    <form method="POST" action="{{ url_for('post_in_group', group_id=group.id) }}" class="post-form">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            <label for="title">帖子标题</label>
+            {{ form.title(class="form-control", placeholder="请输入帖子标题") }}
+{#            {% if form.title.errors %}#}
+{#                <div class="invalid-feedback">#}
+{#                    {% for error in form.title.errors %}#}
+{#                        <p>{{ error }}</p>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            {% endif %}#}
+        </div>
+
+        <div class="form-group">
+            <label for="content">帖子内容</label>
+            {{ form.content(class="form-control", placeholder="请输入帖子内容", rows=6) }}
+{#            {% if form.content.errors %}#}
+{#                <div class="invalid-feedback">#}
+{#                    {% for error in form.content.errors %}#}
+{#                        <p>{{ error }}</p>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            {% endif %}#}
+        </div>
+
+        <!-- 按钮容器，按钮并列显示 -->
+        <div class="button-container">
+            <button type="submit" class="btn-submit">发布帖子</button>
+            <a href="{{ url_for('group_detail', group_id=group.id) }}" class="btn-back">返回小组</a>
+        </div>
+    </form>
+{% endblock %}

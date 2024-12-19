@@ -1,0 +1,81 @@
+/* register.css */
+
+/* 表单标题样式 */
+h2 {
+    color: #333;
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+}
+
+/* 表单元素 */
+.form-group {
+    margin-bottom: 20px; /* 每个表单项的间距 */
+}
+
+/* 表单输入框 */
+.form-control {
+    border-radius: 8px;   /* 圆角，简洁风格 */
+    border: 1px solid #ddd;  /* 灰色边框，不突兀 */
+    height: 45px;  /* 输入框高度 */
+    font-size: 1rem;  /* 合适的字体大小 */
+    padding: 10px;  /* 内部内边距 */
+    width: 100%;  /* 输入框宽度自适应父元素 */
+}
+
+/* 输入框聚焦时的效果 */
+.form-control:focus {
+    border-color: #007bff; /* 聚焦时蓝色边框 */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* 轻微的蓝色阴影 */
+}
+
+/* 错误提示 */
+.invalid-feedback {
+    font-size: 0.875rem;
+    color: #e74c3c;
+    margin-top: 5px; /* 错误信息的上边距，和输入框对齐 */
+}
+
+/* 提交按钮 */
+.btn-primary {
+    background-color: #4CAF50;  /* 绿色背景 */
+    border: 1px solid #4CAF50;  /* 边框与背景色一致 */
+    color: white;  /* 白色字体 */
+    padding: 12px 24px;  /* 合理的内边距 */
+    font-size: 1rem;    /* 字体大小 */
+    border-radius: 30px;  /* 圆角按钮 */
+    text-transform: uppercase; /* 字母大写 */
+    font-weight: bold;    /* 加粗字体 */
+    cursor: pointer;     /* 鼠标指针 */
+    transition: all 0.3s ease; /* 平滑的过渡效果 */
+    margin-bottom: 20px; /* 提交按钮与下面的文本之间保持一定间隔 */
+}
+
+
+/* 鼠标悬停效果 */
+.btn-primary:hover {
+    background-color: #45a049;  /* 鼠标悬停时的深绿色 */
+    border-color: #45a049;  /* 悬停时边框颜色也变为深绿色 */
+    transform: translateY(-2px); /* 鼠标悬停时轻微上移 */
+}
+
+/* 按钮点击效果 */
+.btn-primary:active {
+    background-color: #388e3c; /* 点击时更深的绿色 */
+    border-color: #388e3c; /* 点击时边框颜色加深 */
+    transform: translateY(1px); /* 点击时轻微下沉 */
+}
+
+/* 文字链接 */
+
+.text-center {
+    margin-top: 20px; /* 给文本和提交按钮之间增加间隔 */
+}
+
+.text-center a {
+    color: #007bff;
+}
+
+.text-center a:hover {
+    text-decoration: underline;
+}

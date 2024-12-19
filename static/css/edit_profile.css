@@ -1,0 +1,80 @@
+/* 页面标题样式 */
+h1 {
+    color: #333;             /* 深灰色字体 */
+    font-weight: bold;       /* 字体加粗 */
+    font-size: 1.8rem;       /* 标题字体大小 */
+    margin-bottom: 30px;     /* 底部间距 */
+}
+
+/* 表单整体样式 */
+form {
+    max-width: 500px;        /* 最大宽度500px */
+    margin: 0 auto;          /* 居中对齐 */
+    padding: 20px;           /* 内边距 */
+    background-color: #fff;  /* 白色背景 */
+    border-radius: 8px;      /* 圆角 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+/* 每个输入项样式 */
+form div {
+    margin-bottom: 20px;     /* 每个表单项之间的间距 */
+}
+
+/* 表单标签样式 */
+form label {
+    display: block;          /* 标签块级显示 */
+    margin-bottom: 5px;      /* 标签和输入框之间的间距 */
+    font-weight: bold;       /* 标签字体加粗 */
+    color: #333;             /* 深灰色标签 */
+}
+
+/* 输入框样式 */
+form input {
+    width: 100%;             /* 输入框宽度为100% */
+    padding: 10px;           /* 内边距 */
+    font-size: 1rem;         /* 字体大小 */
+    border: 1px solid #ccc; /* 边框颜色 */
+    border-radius: 5px;      /* 圆角边框 */
+    box-sizing: border-box;  /* 包括内边距和边框的总宽度 */
+    transition: border-color 0.3s ease; /* 平滑过渡 */
+}
+
+/* 输入框聚焦时的样式 */
+form input:focus {
+    border-color: #007bff;   /* 聚焦时的边框颜色 */
+    outline: none;           /* 移除默认的蓝色外轮廓 */
+}
+
+/* 提交按钮样式 */
+form button[type="submit"] {
+    text-decoration: none;     /* 移除下划线 */
+    background-color: #007bff; /* 蓝色背景 */
+    border: 1px solid #007bff; /* 蓝色边框 */
+    color: white;              /* 白色字体 */
+    padding: 12px 24px;        /* 内边距 */
+    font-size: 1rem;           /* 字体大小 */
+    border-radius: 30px;       /* 圆角 */
+    text-transform: uppercase; /* 大写字母 */
+    font-weight: bold;         /* 字体加粗 */
+    cursor: pointer;          /* 鼠标指针变为点击手型 */
+    transition: all 0.3s ease; /* 平滑过渡 */
+    display: inline-block;     /* 保持按钮与其他内容同一行 */
+    width: 100%;               /* 按钮宽度自适应 */
+    max-width: 250px;          /* 最大宽度 */
+    margin-top: 20px;          /* 与提交框的间隔 */
+}
+
+/* 提交按钮鼠标悬停效果 */
+form button[type="submit"]:hover {
+    background-color: #0056b3;  /* 鼠标悬停时背景色更深 */
+    border-color: #0056b3;      /* 边框颜色变化 */
+    transform: translateY(-2px); /* 按钮上移 */
+}
+
+/* 提交按钮点击效果 */
+form button[type="submit"]:active {
+    background-color: #004085;  /* 点击时按钮变为更深的蓝色 */
+    border-color: #004085;      /* 边框颜色变化 */
+    transform: translateY(1px);  /* 按钮下移 */
+}

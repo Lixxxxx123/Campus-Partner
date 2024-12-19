@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} - 帖子详情{% endblock %}
+
+{% block styles %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/post_detail.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h1 class="post-title">{{ post.title }}</h1>
+    <p class="post-meta">
+        <span class="post-author">作者：{{ post.author.username }}</span> |
+        <span class="post-date">发表于：{{ post.date_created.strftime('%Y-%m-%d %H:%M:%S') }}</span> |
+        <span class="post-group">小组：{{ group.name }}</span>
+    </p>
+
+    <div class="post-detail-content">
+        <p>{{ post.content }}</p>
+    </div>
+
+
+    <!-- 点赞按钮 -->
+    <div class="post-detail-actions">
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('like_post', group_id=group.id, post_id=post.id) }}" class="like-button {% if like_by_user %} liked {% endif %}">
+                <i class="fas fa-heart"></i> <!-- 爱心图标 -->
+            </a>
+        {% endif %}
+    </div>
+
+    <!-- 评论区 -->
+    <div class="post-detail-comments">
+        <h2>评论区</h2>
+        {% if current_user.is_authenticated %}
+            <!-- 评论表单 -->
+            <form method="POST" action="{{ url_for('post_detail', group_id=group.id, post_id=post.id) }}">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.content(class="form-control", placeholder="写下你的评论...") }}
+                </div>
+                <button type="submit" class="btn btn-primary">发布评论</button>
+            </form>
+        {% else %}
+            <p>请<a href="{{ url_for('login') }}">登录</a>后，以解锁点赞和评论功能</p>
+        {% endif %}
+
+
+        <!-- 显示评论 -->
+        {% for comment in comments %}
+            <div class="comment-item">
+                <!-- 楼层 -->
+                <div class="comment-floor">#{{ loop.length - loop.index + 1 }}楼</div>
+
+                <div class="comment-author">
+                    <strong>{{ comment.author.username }}</strong>
+                    <span class="comment-date">{{ comment.date_created.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+                </div>
+                <p class="comment-content">{{ comment.content }}</p>
+
+                {% if comment.author == current_user or post.author == current_user or group.admin == current_user or current_user.role == 'admin' %}
+                    <form method="POST" action="{{ url_for('delete_comment',comment_id=comment.id) }}" class="delete-comment-form">
+                        <button type="submit" class="btn-delete-comment">删除评论</button>
+                    </form>
+                {% endif %}
+            </div>
+        {% endfor %}
+        {% if not comments %}
+            <p>暂时还没有人，快来发表你的评论吧</p>
+        {% endif %}
+
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}我的小组{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/my_groups.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h1>我的小组</h1>
+
+    <div class="group-actions">
+        <!-- 创建小组按钮 -->
+        <a href="{{ url_for('create_group') }}" class="btn btn-primary create-group-button">创建小组</a>
+    </div>
+
+    {% if groups %}
+        <div class="groups-list">
+            <h2>已加入的小组</h2>
+            <ul>
+                {% for group in groups %}
+                    <div class="group-card">
+                        <a href="{{ url_for('group_detail', group_id=group.id) }}" class="group-link">
+                            <h3 class="group-name">{{ group.name }}</h3>
+                        </a>
+                        <p class="group-description">{{ group.description }}</p>
+                          <!-- 退出小组 -->
+                        <form action="{{ url_for('leave_group', group_id=group.id) }}" method="POST" class="leave-group-form">
+                            <button type="submit" class="btn btn-danger">退出小组</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <p>你还没有加入任何小组，快去加入吧！</p>
+    {% endif %}
+{% endblock %}

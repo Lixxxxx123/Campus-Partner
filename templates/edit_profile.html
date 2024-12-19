@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}修改个人信息{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/edit_profile.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h1>修改个人信息</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div>
+            <label for="username">用户名：</label>
+            {{ form.username(size=32) }}
+        </div>
+        <div>
+            <label for="email">邮箱：</label>
+            {{ form.email(size=32) }}
+        </div>
+        <div>
+            <button type="submit">提交</button>
+        </div>
+    </form>
+{% endblock %}

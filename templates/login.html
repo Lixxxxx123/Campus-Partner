@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}登录 - Campus Partner{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2 class="text-center">用户登录</h2>
+
+    <form method="POST" action="{{ url_for('login') }}">
+        {{ form.hidden_tag() }}
+
+        <!-- 邮箱输入框 -->
+        <div class="form-group">
+            <label for="email">电子邮件</label>
+            {{ form.email(class="form-control", id="email", placeholder="请输入电子邮件") }}
+            {% if form.email.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.email.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- 密码输入框 -->
+        <div class="form-group">
+            <label for="password">密码</label>
+            {{ form.password(class="form-control", id="password", placeholder="请输入密码") }}
+            {% if form.password.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- 登录按钮 -->
+        <button type="submit" class="btn btn-primary btn-block">登录</button>
+    </form>
+
+    <!-- 下面的链接 -->
+    <p class="text-center mt-3">没有账户？<a href="{{ url_for('register') }}">立即注册</a></p>
+</div>
+{% endblock %}

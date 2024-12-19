@@ -1,0 +1,253 @@
+/* group_detail.css */
+
+/* 页面容器 */
+.group-detail-container {
+    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+    box-sizing: border-box;
+}
+
+/* 小组头部 */
+.group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.group-header-info {
+    max-width: 60%;
+}
+
+.group-name {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.group-description {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.group-admin {
+    font-size: 1rem;
+    color: #007bff;
+    font-weight: 600;
+}
+
+.group-header-image {
+    max-width: 35%;
+    text-align: center;
+}
+
+.group-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #007bff;
+}
+
+/* 小组成员 */
+.group-members {
+    margin-top: 50px;
+}
+
+.group-members h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.members-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.member-card {
+    text-align: center;
+    width: 120px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
+}
+
+.member-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.member-card p {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+/* 小组帖子 */
+.group-posts {
+    margin-top: 50px;
+}
+
+.group-posts h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.post-list {
+    list-style: none;
+    padding: 0;
+}
+
+.post-item {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 15px 20px;
+    border-radius: 8px; /* 确保圆角 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 默认的阴影效果 */
+    transition: box-shadow 0.3s ease; /* 添加平滑过渡效果 */
+    position: relative;
+}
+
+.post-item form {
+    position: absolute;  /* 使删除按钮浮动 */
+    top: 50%;           /* 向顶部调整 */
+    right: 20px;         /* 向右对齐 */
+    transform: translateY(-50%);
+}
+
+.post-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* 增强的阴影效果 */
+    border-radius: 8px; /* 确保圆角在悬停时也保留 */
+}
+
+.post-title {
+    font-size: 1.2rem;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.post-title:hover {
+    color: #0056b3;
+}
+
+.post-date {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 5px;
+}
+
+/* 小组操作 */
+.group-actions {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.group-actions form {
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.group-actions .already-member {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* 基本按钮样式 */
+.btn-join-group,
+.btn-edit-group,
+.btn-create-post,
+.btn-delete-post {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    margin: 0 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-join-group:hover,
+.btn-edit-group:hover,
+.btn-create-post:hover,
+.btn-delete-post:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+}
+
+/* 删除成员按钮特别样式 */
+.btn-remove-member {
+    background-color: #e74c3c; /* 红色背景 */
+    color: white;
+    padding: 6px 14px;  /* 调整为较小的按钮尺寸，适应卡片 */
+    font-size: 0.9rem;   /* 缩小字体 */
+    border-radius: 20px; /* 较小的圆角 */
+    display: inline-block;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* 删除按钮悬停效果 */
+.btn-remove-member:hover {
+    background-color: #c0392b;  /* 悬停时颜色加深 */
+    transform: translateY(-2px);
+}
+
+/* 已加入小组按钮 */
+.group-actions .btn-join-group {
+    background-color: #28a745;
+}
+
+.group-actions .btn-join-group:hover {
+    background-color: #218838;
+}
+
+/* 编辑小组按钮 */
+.group-actions .btn-edit-group {
+    background-color: #ffc107;
+}
+
+.group-actions .btn-edit-group:hover {
+    background-color: #e0a800;
+}
+
+/* 删除帖子按钮 */
+.btn-delete-post {
+    background-color: #e74c3c;
+    font-size: 0.9rem;
+    padding: 8px 18px;
+}
+
+.btn-delete-post:hover {
+    background-color: #c0392b;
+}
+
+/*

@@ -1,0 +1,251 @@
+/* 基础样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 页面主体样式 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    padding: 20px; /* 页面内边距 */
+}
+
+/* 帖子标题和元数据 */
+.post-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.post-meta {
+    font-size: 1rem;
+    color: #888;
+    margin-top: 10px;
+}
+
+.post-meta span {
+    margin-right: 15px;
+}
+
+.post-author {
+    color: #007bff;
+}
+
+.post-date, .post-group {
+    color: #555;
+}
+
+/* 帖子内容 */
+.post-detail-content {
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* 点赞按钮样式 */
+.post-detail-actions {
+    position: relative;
+    margin-top: 20px;
+}
+
+.like-button {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    font-size: 2rem;
+    color: #ccc; /* 初始颜色为灰色 */
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+.like-button:hover {
+    color: #ff4d4d; /* 悬停时的颜色 */
+}
+
+.like-button.liked {
+    color: red; /* 点赞时变为红色 */
+}
+
+/* 评论区样式 */
+/* 评论区样式 */
+.post-detail-comments {
+    margin-top: 50px;
+}
+
+.post-detail-comments h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: bold;
+    border-bottom: 2px solid #f1f1f1; /* 给评论区标题添加底边 */
+    padding-bottom: 10px;
+}
+
+/* 每条评论的样式 */
+.comment-item {
+    background-color: rgba(249, 249, 249, 0.9);  /* 轻微透明的背景色 */
+    padding: 40px;
+    border-radius: 10px; /* 更圆滑的角 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+    transition: all 0.3s ease; /* 过渡效果 */
+}
+
+.comment-item:hover {
+    background-color: rgba(249, 249, 249, 1); /* 鼠标悬停时背景不透明 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 增强阴影效果 */
+}
+
+/* 楼层号 */
+.comment-floor {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+/* 评论作者样式 */
+.comment-author {
+    font-weight: bold;
+    color: #007bff;
+    font-size: 1.1rem;
+}
+
+.comment-date {
+    font-size: 0.9rem;
+    color: #888;
+    margin-left: 10px;
+    font-style: italic;
+}
+
+/* 评论内容 */
+.comment-content {
+    margin-top: 15px;
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* 评论表单样式 */
+.form-group {
+    margin-bottom: 20px; /* 增加表单之间的间隔 */
+}
+
+.form-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    margin-bottom: 10px; /* 控制输入框与按钮的间隔 */
+}
+
+.form-control:focus {
+    border-color: #007bff; /* 聚焦时边框颜色 */
+    outline: none;
+    box-shadow: 0 0 3px rgba(0, 123, 255, 0.5); /* 聚焦时的阴影 */
+}
+
+
+button.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button.btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px); /* 按钮悬停效果：上移 */
+}
+
+button.btn-primary:active {
+    transform: translateY(1px); /* 按钮点击效果：下移 */
+}
+
+/* 为评论区和表单增加上下间距 */
+.post-detail-comments {
+    padding-top: 40px; /* 评论区和帖子之间增加一些空间 */
+}
+
+/* 评论列表与表单之间的间隔 */
+.comment-form {
+    margin-top: 40px;
+}
+
+/* 删除评论按钮 */
+.delete-comment-form {
+    position: relative;
+    /* 保证按钮在评论项内浮动 */
+}
+
+.btn-delete-comment {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    padding: 10px 20px;  /* 更大的内边距使按钮更加椭圆 */
+    background-color: #ff4d4f;  /* 红色背景 */
+    color: white;  /* 白色文字 */
+    border: none;
+    border-radius: 50px;  /* 椭圆形按钮 */
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;  /* 平滑过渡效果 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* 阴影效果 */
+}
+
+/* 按钮 hover 效果 */
+.btn-delete-comment:hover {
+    background-color: #f5222d;  /* 更深的红色 */
+    transform: translateY(-50%) scale(1.05);  /* 放大效果 */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);  /* 增强阴影 */
+}
+
+/* 按钮点击时的效果 */
+.btn-delete-comment:active {
+    transform: translateY(-50%) scale(0.98);  /* 点击时缩小效果 */
+}
+
+/* 响应式设计：适配小屏幕 */
+@media (max-width: 768px) {
+    .post-detail-comments h2 {
+        font-size: 1.5rem;
+    }
+
+    .comment-item {
+        padding: 15px;
+    }
+
+    .comment-author {
+        font-size: 1rem;
+    }
+
+    .comment-content {
+        font-size: 0.95rem;
+    }
+
+    button.btn-primary {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}

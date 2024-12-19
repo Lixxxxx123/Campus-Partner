@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}个人信息{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h1>个人信息</h1>
+    <div class="profile-info">
+        <p><strong>用户名：</strong>{{ user.username }}</p>
+        <p><strong>邮箱：</strong>{{ user.email }}</p>
+{#        <p><strong>头像：</strong></p>#}
+{#        <img src="{{ user.get_avatar() }}" alt="Avatar" width="150" height="150">#}
+    </div>
+
+    <a class="btn-group" href="{{ url_for('my_groups') }}">查看我的小组</a>
+
+    <a class="btn-edit" href="{{ url_for('edit_profile') }}">修改个人信息</a>
+
+{% endblock %}

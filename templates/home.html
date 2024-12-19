@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}首页{% endblock %}
+
+{% block styles %}
+    <!-- 引入首页特定的CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+    <!-- 首页的主要内容 -->
+
+    <header class="home-header">
+        <form method="get" action="{{ url_for('home') }}" class="search-form">
+            <input type="text" name="search" placeholder="搜索帖子或小组" value="{{ search_query }}" class="search-input">
+            <button type="submit" class="search-button">搜索</button>
+        </form>
+    </header>
+
+    <!-- 显示搜索结果 -->
+    <section class="home-search-results">
+        {% if search_query %}
+            <h2 class="home-search-results-title">搜索结果</h2>
+
+            {% if groups.items %}
+            <div class="home-results-group">
+                <ul class="home-results-list">
+                    {% for group in groups %}
+                        <div class="group-card">
+                            <h3 class="group-name">{{ group.name }}</h3>
+                            <p class="group-description">{{ group.description }}</p>
+                            <p class="group-admin"><strong>管理员：</strong>{{ group.admin.username }}</p>
+                            <a href="{{ url_for('group_detail', group_id=group.id) }}" class="btn-view-group">查看小组</a>
+                        </div>
+                    {% endfor %}
+                </ul>
+                <!-- 小组分页 -->
+                <div class="home-pagination">
+                    {% if groups.has_prev %}
+                        <a href="{{ url_for('home', search=search_query, page=groups.prev_num) }}" class="home-pagination-link">上一页</a>
+                    {% endif %}
+                    {% if groups.has_next %}
+                        <a href="{{ url_for('home', search=search_query, page=groups.next_num) }}" class="home-pagination-link">下一页</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+
+            {% if posts.items %}
+            <div class="home-results-post">
+                <ul class="home-post-list">
+                    {% for post in posts %}
+                        <li class="home-post-item">
+                            <a href="{{ url_for('post_detail', post_id=post.id, group_id=post.group.id) }}" class="home-post-title">{{ post.title }}</a>
+                            <p class="home-post-content">{{ post.content[:50] }}{% if post.content|length > 50 %}...{% endif %}</p>
+                            <p class="home-post-date">{{ post.date_created.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <!-- 帖子分页 -->
+                <div class="home-pagination">
+                    {% if posts.has_prev %}
+                        <a href="{{ url_for('home', search=search_query, page=posts.prev_num) }}" class="home-pagination-link">上一页</a>
+                    {% endif %}
+                    {% if posts.has_next %}
+                        <a href="{{ url_for('home', search=search_query, page=posts.next_num) }}" class="home-pagination-link">下一页</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+        {% else %}
+            <h2 class="home-no-search-title">最新帖子</h2>
+            <!-- 默认显示帖子 -->
+            <div class="home-default-posts">
+                <ul class="home-post-list">
+                    {% for post in posts %}
+                        <li class="home-post-item">
+                            <a href="{{ url_for('post_detail', post_id=post.id, group_id=post.group.id) }}" class="home-post-title">{{ post.title }}</a>
+                            <p class="home-post-content">{{ post.content[:50] }}{% if post.content|length > 50 %}...{% endif %}</p>
+                            <p class="home-post-date">{{ post.date_created.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <!-- 默认分页 -->
+                <div class="home-pagination">
+                    {% if posts.has_prev %}
+                        <a href="{{ url_for('home', page=posts.prev_num) }}" class="home-pagination-link">上一页</a>
+                    {% endif %}
+                    {% if posts.has_next %}
+                        <a href="{{ url_for('home', page=posts.next_num) }}" class="home-pagination-link">下一页</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}
+

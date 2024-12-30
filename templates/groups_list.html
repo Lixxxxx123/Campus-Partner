@@ -18,6 +18,11 @@
                         <p class="group-description">{{ group.description }}</p>
                         <p class="group-admin"><strong>管理员：</strong>{{ group.admin.username }}</p>
                         <a href="{{ url_for('group_detail', group_id=group.id) }}" class="btn-view-group">查看小组</a>
+                        {% if current_user.role == 'admin' %}
+                            <form method="post" action="{{ url_for('delete_group', group_id=group.id) }}" onsubmit="return confirm('确定删除该小组吗？');">
+                                <button type="submit" class="btn-delete-group">删除小组</button>
+                            </form>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>

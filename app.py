@@ -1,5 +1,3 @@
-from tokenize import group
-
 from flask import Flask, render_template, redirect, url_for, flash, abort, request
 from flask_migrate import Migrate
 from sqlalchemy import false
@@ -370,6 +368,60 @@ def like_post(group_id,post_id):
 
     return redirect(url_for('post_detail',group_id=group_id,post_id=post_id))
 
-if __name__ == '__main__':
 
-    app.run(host='0.0.0.0',port=5000,debug=True)
+#管理员页面
+@app.route('/admin',methods=['GET'])
+@login_required
+@role_required(Role.ADMIN)
+def admin_page():
+    users = User.query.all()
+    return render_template('admin.html',users=users)
+
+#修改用户权限
+@app.route('/set_role/<int:user_id>/<role>',methods=['GET','POST'])
+@login_required
+@role_required(Role.ADMIN)
+def set_role(user_id,role):
+    user = User.query.get(user_id)
+    if not user:
+        flash('用户不存在','danger')
+        return redirect(url_for('admin_page'))
+
+    user.set_role(role)
+    db.session.commit()
+    flash(f'用户{user.username}的角色已更改为{role}','success')
+    return redirect(url_for('admin_page'))
+
+#删除小组功能
+@app.route('/group/<int:group_id>/delete',methods=['GET','POST'])
+@login_required
+@role_required(Role.ADMIN)
+def delete_group(group_id):
+    group = Group.query.get(group_id)
+    if not group:
+        flash('小组不存在','danger')
+        return redirect(url_for('groups_list'))
+
+    db.session.delete(group)
+    db.session.commit()
+    flash('小组已删除','success')
+    return redirect(url_for('groups_list'))
+
+#删除用户功能
+@app.route('/user/<int:user_id>/delete',methods=['GET','POST'])
+@login_required
+@role_required(Role.ADMIN)
+def delete_user(user_id):
+    user = User.query.get(user_id)
+    if not user:
+        flash('用户不存在','danger')
+        return redirect(url_for('admin_page'))
+
+    db.session.delete(user)
+    db.session.commit()
+    flash('用户已删除','success')
+    return redirect(url_for('admin_page'))
+
+if __name__ == '__main__':
+    # app.run(debug=True)
+    app.run(host='0.0.0.0',port=4000,debug=True)

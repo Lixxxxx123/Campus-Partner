@@ -15,9 +15,8 @@
     </div>
 
     {% if groups %}
-        <div class="groups-list">
-            <h2>已加入的小组</h2>
-            <ul>
+        <div class="group-container">
+            <div class="group-list">
                 {% for group in groups %}
                     <div class="group-card">
                         <a href="{{ url_for('group_detail', group_id=group.id) }}" class="group-link">
@@ -30,7 +29,7 @@
                         </form>
                     </div>
                 {% endfor %}
-            </ul>
+            </div>
         </div>
     {% else %}
         <p>你还没有加入任何小组，快去加入吧！</p>

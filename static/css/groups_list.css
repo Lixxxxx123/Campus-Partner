@@ -1,3 +1,5 @@
+/* groups_list.css */
+
 /* 页面标题 */
 h1 {
     color: #333;
@@ -19,7 +21,7 @@ h1 {
 /* 小组列表 */
 .group-list {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);  /* 每行最多五个小组卡片 */
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));  /* 每行最多五个小组卡片 */
     gap: 20px;
     grid-auto-rows: minmax(250px, auto);  /* 控制每个卡片的最小高度 */
 }
@@ -67,9 +69,8 @@ h1 {
 }
 
 /* 查看小组按钮 */
-.btn-view-group {
+.btn-view-group,.btn-delete-group {
     text-decoration: none;
-    background-color: #007bff;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -77,11 +78,30 @@ h1 {
     text-transform: uppercase;
     display: inline-block;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 10px;  /* 添加右边距 */
+    font-size: 1rem;
+    border: none;
 }
 
+.btn-view-group {
+    background-color: #007bff;
+    margin-right: 10px;  /* 添加右边距 */
+}
 /* 鼠标悬停效果 */
 .btn-view-group:hover {
     background-color: #0056b3;
+    transform: translateY(-3px);
+}
+
+/* 删除小组按钮 */
+.btn-delete-group {
+    background-color: #dc3545;
+    margin-right: 10px;  /* 添加右边距 */
+}
+
+/* 鼠标悬停效果 */
+.btn-delete-group:hover {
+    background-color: #c82333;
     transform: translateY(-3px);
 }
 

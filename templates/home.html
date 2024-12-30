@@ -21,8 +21,10 @@
     <section class="home-search-results">
         {% if search_query %}
             <h2 class="home-search-results-title">搜索结果</h2>
+            <p class="home-search-results-count">共找到 {{ groups.total + posts.total }} 个结果</p>
 
             {% if groups.items %}
+            <p class="home-search-results-group-count">相关小组</p>
             <div class="home-results-group">
                 <ul class="home-results-list">
                     {% for group in groups %}
@@ -48,6 +50,7 @@
 
 
             {% if posts.items %}
+            <p class="home-search-results-post-count">相关帖子</p>
             <div class="home-results-post">
                 <ul class="home-post-list">
                     {% for post in posts %}
@@ -86,12 +89,13 @@
                 <!-- 默认分页 -->
                 <div class="home-pagination">
                     {% if posts.has_prev %}
-                        <a href="{{ url_for('home', page=posts.prev_num) }}" class="home-pagination-link">上一页</a>
+                        <a href="{{ url_for('home',search=search_query, page=posts.prev_num) }}" class="home-pagination-link">上一页</a>
                     {% endif %}
                     {% if posts.has_next %}
-                        <a href="{{ url_for('home', page=posts.next_num) }}" class="home-pagination-link">下一页</a>
+                        <a href="{{ url_for('home',search=search_query, page=posts.next_num) }}" class="home-pagination-link">下一页</a>
                     {% endif %}
                 </div>
+
             </div>
         {% endif %}
     </section>
